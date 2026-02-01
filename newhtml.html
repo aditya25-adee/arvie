@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Girlfriend?</title>
+    <style>
+        /* CSS: Making it look cute and mobile-friendly */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffeef2;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden; /* Prevents scrolling when button moves */
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: relative; /* Needed for JS movement */
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        img {
+            max-width: 80%;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <div id="askSection">
+            <img src="https://fetchpik.com/images/fetchpik.com-NB3FpTC6kV.gif">
+            <h1>Arvie, will you be my Girlfriend?</h1>
+            <div class="buttons">
+                <button id="yesBtn">Yes</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+
+        <div id="celebration" class="hidden">
+            <h1>YAY! 🎉</h1>
+            <img src="https://fetchpik.com/images/fetchpik.com-bD1kmv9iod.gif" alt="Celebration">
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const askSection = document.getElementById('askSection');
+        const celebration = document.getElementById('celebration');
+
+        // Logic for the "No" button to jump away on touch/click
+        const moveButton = () => {
+            // Calculate random positions within the screen bounds
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        };
+
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevents the actual "click" on mobile
+            moveButton();
+        });
+
+        noBtn.addEventListener('click', moveButton);
+
+        // Logic for the "Yes" button
+        yesBtn.addEventListener('click', () => {
+            askSection.classList.add('hidden');
+            celebration.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
